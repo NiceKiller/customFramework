@@ -3,6 +3,7 @@ package page;
 import core.SeleniumCore;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import wait.CustomWaits;
 
 
@@ -24,9 +25,26 @@ public abstract class AbstractPage {
         PageFactory.initElements(seleniumCore.getWebDriver(), this);
     }
 
-    public void clickElement(WebElement webElement){
+    public void clickElement(WebElement webElement) {
         customWaits.waitForElementPresent(webElement);
         webElement.click();
+    }
+
+    public void sendKeys(WebElement webElement, String text) {
+        customWaits.waitForElementPresent(webElement);
+        webElement.clear();
+        webElement.sendKeys(text);
+    }
+
+    public void setValueFromSelect(WebElement webElement, String value) {
+        customWaits.waitForElementPresent(webElement);
+        Select Select = new Select(webElement);
+        Select.selectByValue(value);
+    }
+
+    public String getElementText(WebElement webElement) {
+        customWaits.waitForElementPresent(webElement);
+        return webElement.getText();
     }
 
 }

@@ -10,7 +10,10 @@ import org.openqa.selenium.support.FindBy;
 public class MainMenuPage extends AbstractPage {
 
     @FindBy(xpath = "//a[contains(@href,'register')]")
-    WebElement registrationButton;
+    private WebElement registrationButton;
+
+    @FindBy(xpath = "//a[contains(@href,'/customer/info')]")
+    private WebElement customerInformationLabel;
 
     public MainMenuPage(SeleniumCore seleniumCore) {
         super(seleniumCore);
@@ -18,6 +21,10 @@ public class MainMenuPage extends AbstractPage {
 
     public void clickRegistrationButton(){
         clickElement(registrationButton);
+    }
+
+    public String getCustomerInformationLabelText(){
+        return getElementText(customerInformationLabel);
     }
 
 
