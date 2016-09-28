@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import utils.OsCheck;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,13 +15,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebDriverCreators {
 
-    private static final Dimension WINDOW_SIZE_PC = new Dimension(1920, 955);
+    private WebDriverCreators() {
+    }
 
     public static final WebDriverCreator FIREFOX = new WebDriverCreator() {
         @Override
         public WebDriver create() {
-            WebDriver driver = new FirefoxDriver();
-            setDefaultSettings(driver, WINDOW_SIZE_PC);
+            checkOsAndSetSystemProperty();
+            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+            capabilities.setCapability("marionette", true);
+            WebDriver driver = new FirefoxDriver(capabilities);
+            setDefaultSettings(driver);
             return driver;
         }
 
@@ -30,19 +36,36 @@ public class WebDriverCreators {
     public static final WebDriverCreator CHROME = new WebDriverCreator() {
         @Override
         public WebDriver create() {
+            checkOsAndSetSystemProperty();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--lang=en");
-            options.setBinary("src/main/resources/drivers/chromedriver_win.exe");
             ChromeDriver driver = new ChromeDriver(options);
-            setDefaultSettings(driver, WINDOW_SIZE_PC);
+            setDefaultSettings(driver);
             return driver;
         }
 
     };
 
-    private static void setDefaultSettings(WebDriver driver, Dimension dimension) {
-        driver.manage().window().setSize(dimension);
+    private static void setDefaultSettings(WebDriver driver) {
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+    }
+
+    private static String checkOsAndSetSystemProperty() {
+        String path = null;
+        OsCheck.OSType osType = OsCheck.getOperatingSystemType();
+        switch (osType) {
+            case Windows:
+                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver_win.exe");
+                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver_win.exe");
+                break;
+            case Linux:
+                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver_linux.exe");
+                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver_linux.exe");
+                break;
+        }
+
+        return path;
     }
 
 }

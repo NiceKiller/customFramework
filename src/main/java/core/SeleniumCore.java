@@ -15,10 +15,9 @@ public class SeleniumCore {
 
     public SeleniumCore(String browser) {
 
-        if(browser.equalsIgnoreCase("firefox")){
+        if (browser == null || browser.equalsIgnoreCase("firefox")) {
             driver = new WebDriverProvider(WebDriverCreators.FIREFOX).getDriver();
-        }
-        else if(browser.equalsIgnoreCase("chrome")){
+        } else if (browser.equalsIgnoreCase("chrome")) {
             driver = new WebDriverProvider(WebDriverCreators.CHROME).getDriver();
         }
     }

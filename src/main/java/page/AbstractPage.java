@@ -1,6 +1,7 @@
 package page;
 
 import core.SeleniumCore;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import wait.CustomWaits;
 
@@ -21,6 +22,11 @@ public abstract class AbstractPage {
 
     private void initPage() {
         PageFactory.initElements(seleniumCore.getWebDriver(), this);
+    }
+
+    public void clickElement(WebElement webElement){
+        customWaits.waitForElementPresent(webElement);
+        webElement.click();
     }
 
 }
