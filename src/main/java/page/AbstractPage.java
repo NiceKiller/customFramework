@@ -26,7 +26,7 @@ public abstract class AbstractPage {
     }
 
     public void clickElement(WebElement webElement) {
-        customWaits.waitForElementPresent(webElement);
+        customWaits.waitForElementBeingClickable(webElement);
         webElement.click();
     }
 
@@ -40,6 +40,12 @@ public abstract class AbstractPage {
         customWaits.waitForElementPresent(webElement);
         Select Select = new Select(webElement);
         Select.selectByValue(value);
+    }
+
+    public void setTextFromSelect(WebElement webElement, String text) {
+        customWaits.waitForElementPresent(webElement);
+        Select Select = new Select(webElement);
+        Select.selectByVisibleText(text);
     }
 
     public String getElementText(WebElement webElement) {

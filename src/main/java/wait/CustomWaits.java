@@ -1,5 +1,6 @@
 package wait;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,5 +26,23 @@ public class CustomWaits {
     private WebElement waitForElementPresent(final WebElement element, final int seconds) {
         WebDriverWait wait = new WebDriverWait(driver, seconds);
         return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public WebElement waitForElementBeingClickable(final WebElement element) {
+        return waitForElementBeingClickable(element, globalWaitTime);
+    }
+
+    private WebElement waitForElementBeingClickable(final WebElement element, final int seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public Boolean waitForElementIsNotVisible(final By locator) {
+        return waitForElementIsNotVisible(locator, globalWaitTime);
+    }
+
+    private Boolean waitForElementIsNotVisible(final By locator, final int seconds) {
+        WebDriverWait wait = new WebDriverWait(driver, seconds);
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 }

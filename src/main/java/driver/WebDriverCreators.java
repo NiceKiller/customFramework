@@ -41,7 +41,7 @@ public class WebDriverCreators {
     };
 
     private static void setDefaultSettings(WebDriver driver) {
-        driver.manage().window().setSize(WINDOW_SIZE_PC);
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 

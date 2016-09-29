@@ -1,9 +1,10 @@
-package page;
+package page.nopcommerce;
 
 import core.SeleniumCore;
 import data.enums.Gender;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import page.AbstractPage;
 
 /**
  * Created by bzawa on 9/28/2016.
