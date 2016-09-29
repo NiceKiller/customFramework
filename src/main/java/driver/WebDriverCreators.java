@@ -1,5 +1,6 @@
 package driver;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,39 +15,33 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebDriverCreators {
 
+    private static final Dimension WINDOW_SIZE_PC = new Dimension(1920, 955);
+
     private WebDriverCreators() {
     }
 
-    public static final WebDriverCreator FIREFOX = new WebDriverCreator() {
-        @Override
-        public WebDriver create() {
-            checkOsAndSetSystemProperty();
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            capabilities.setCapability("marionette", true);
-            WebDriver driver = new FirefoxDriver(capabilities);
-            setDefaultSettings(driver);
-            return driver;
-        }
-
+    public static final WebDriverCreator FIREFOX = () -> {
+        checkOsAndSetSystemProperty();
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette", true);
+        WebDriver driver = new FirefoxDriver(capabilities);
+        setDefaultSettings(driver);
+        return driver;
     };
 
     public static final WebDriverCreator DEFAULT = FIREFOX;
 
-    public static final WebDriverCreator CHROME = new WebDriverCreator() {
-        @Override
-        public WebDriver create() {
-            checkOsAndSetSystemProperty();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--lang=en");
-            ChromeDriver driver = new ChromeDriver(options);
-            setDefaultSettings(driver);
-            return driver;
-        }
-
+    public static final WebDriverCreator CHROME = () -> {
+        checkOsAndSetSystemProperty();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--lang=en");
+        ChromeDriver driver = new ChromeDriver(options);
+        setDefaultSettings(driver);
+        return driver;
     };
 
     private static void setDefaultSettings(WebDriver driver) {
-        driver.manage().window().maximize();
+        driver.manage().window().setSize(WINDOW_SIZE_PC);
         driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
     }
 

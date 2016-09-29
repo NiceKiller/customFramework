@@ -2,8 +2,8 @@ package cart;
 
 import common.AbstractBaseTest;
 import data.enums.Gender;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 import page.manager.PageObjectManager;
 
 import java.util.UUID;
@@ -17,13 +17,13 @@ public class ShopCartTest extends AbstractBaseTest {
 
     private PageObjectManager manager;
 
-    @BeforeTest
+    @Before
     public void setUp() {
         manager = new PageObjectManager(driver);
     }
 
     @Test
-    public void baseTest() throws InterruptedException {
+    public void shopCartTest() throws InterruptedException {
         UUID random = UUID.randomUUID();
 
         manager.getMainMenuPage()
@@ -43,7 +43,7 @@ public class ShopCartTest extends AbstractBaseTest {
                 .confirmRegistration();
 
         assertThat(manager.getRegistrationPage().getAfterRegistrationMessage()).as("Check if registration was successful")
-                .isEqualToIgnoringCase("Your registration completed");
+                .isEqualToIgnoringCase("Your registration completed1");
 
         manager.getRegistrationPage().clickContinueRegistrationButton();
 

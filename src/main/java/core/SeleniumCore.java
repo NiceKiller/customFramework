@@ -3,7 +3,8 @@ package core;
 import driver.WebDriverCreators;
 import driver.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
-import org.testng.Reporter;
+
+import java.util.Optional;
 
 
 /**
@@ -14,10 +15,11 @@ public class SeleniumCore {
     private WebDriver driver;
 
     public SeleniumCore(String browser) {
+        Optional<String> browserOptional = Optional.of(browser);
 
-        if (browser == null || browser.equalsIgnoreCase("firefox")) {
+        if (browserOptional.isPresent() == false || browserOptional.get().equalsIgnoreCase("firefox")) {
             driver = new WebDriverProvider(WebDriverCreators.FIREFOX).getDriver();
-        } else if (browser.equalsIgnoreCase("chrome")) {
+        } else if (browserOptional.get().equalsIgnoreCase("chrome")) {
             driver = new WebDriverProvider(WebDriverCreators.CHROME).getDriver();
         }
     }
@@ -31,7 +33,6 @@ public class SeleniumCore {
     }
 
     public void navigate(String URL) {
-        Reporter.log("Opening " + URL);
         driver.get(URL);
     }
 }
