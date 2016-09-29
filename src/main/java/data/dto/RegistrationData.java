@@ -17,16 +17,6 @@ public class RegistrationData {
     private String company;
     private String password;
 
-    public RegistrationData(Gender gender, String firstName, String lastName, Date dateOfBirth, String email, String company, String password) {
-        this.gender = gender;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.email = email;
-        this.company = company;
-        this.password = password;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -89,5 +79,68 @@ public class RegistrationData {
         this.password = password;
         return this;
     }
-    
+
+    public static final class RegistrationDataBuilder {
+        private Gender gender;
+        private String firstName;
+        private String lastName;
+        private Date dateOfBirth;
+        private String email;
+        private String company;
+        private String password;
+
+        private RegistrationDataBuilder() {
+        }
+
+        public static RegistrationDataBuilder aRegistrationData() {
+            return new RegistrationDataBuilder();
+        }
+
+        public RegistrationDataBuilder withGender(Gender gender) {
+            this.gender = gender;
+            return this;
+        }
+
+        public RegistrationDataBuilder withFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public RegistrationDataBuilder withLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public RegistrationDataBuilder withDateOfBirth(Date dateOfBirth) {
+            this.dateOfBirth = dateOfBirth;
+            return this;
+        }
+
+        public RegistrationDataBuilder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public RegistrationDataBuilder withCompany(String company) {
+            this.company = company;
+            return this;
+        }
+
+        public RegistrationDataBuilder withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public RegistrationData build() {
+            RegistrationData registrationData = new RegistrationData();
+            registrationData.setGender(gender);
+            registrationData.setFirstName(firstName);
+            registrationData.setLastName(lastName);
+            registrationData.setDateOfBirth(dateOfBirth);
+            registrationData.setEmail(email);
+            registrationData.setCompany(company);
+            registrationData.setPassword(password);
+            return registrationData;
+        }
+    }
 }

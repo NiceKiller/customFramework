@@ -10,6 +10,10 @@ import page.AbstractPage;
  */
 public class CheckoutPage extends AbstractPage {
 
+    /*
+     * TODO: this class can be split into separate for each checkout step
+     */
+
     @FindBy(id = "BillingNewAddress_CountryId")
     private WebElement countrySelect;
 
