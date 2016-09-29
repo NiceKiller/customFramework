@@ -55,12 +55,16 @@ public class WebDriverCreators {
         OsCheck.OSType osType = OsCheck.getOperatingSystemType();
         switch (osType) {
             case Windows:
-                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver_win.exe");
-                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver_win.exe");
+                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chrome\\chromedriver_win.exe");
+                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\gecko\\geckodriver_win.exe");
                 break;
             case Linux:
-                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chromedriver_linux.exe");
-                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\geckodriver_linux.exe");
+                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chrome\\chromedriver_linux.exe");
+                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\gecko\\geckodriver_linux.exe");
+                break;
+            case MacOS:
+                System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\drivers\\chrome\\chromedriver_mac.exe");
+                System.setProperty("webdriver.gecko.driver", "src\\main\\resources\\drivers\\gecko\\geckodriver_mac.exe");
                 break;
         }
 

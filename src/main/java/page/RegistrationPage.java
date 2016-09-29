@@ -52,7 +52,7 @@ public class RegistrationPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='result']")
     private WebElement afterRegistrationMessage;
 
-    @FindBy(id = "register-continue")
+    @FindBy(name = "register-continue")
     private WebElement continueRegistrationButton;
 
     public RegistrationPage(SeleniumCore seleniumCore) {
