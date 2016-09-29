@@ -10,12 +10,13 @@
 
     <properties>
         <!-- should be overridden via environment variables -->
-        <browser>chrome</browser>
+        <browser/>
 
         <!-- often changed dependencies -->
         <dependencies.assertj.version>3.5.2</dependencies.assertj.version>
         <dependencies.selenium.version>3.0.0-beta1</dependencies.selenium.version>
         <dependencies.apache.common.version>1.3.2</dependencies.apache.common.version>
+        <dependencies.slf4j.version>1.5.11</dependencies.slf4j.version>
     </properties>
 
 
@@ -74,7 +75,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.11</version>
+            <version>${dependencies.slf4j.version}</version>
         </dependency>
     </dependencies>
 

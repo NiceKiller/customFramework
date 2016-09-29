@@ -1,10 +1,9 @@
 package core;
 
+import data.enums.Browsers;
 import driver.WebDriverCreators;
 import driver.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
-
-import java.util.Optional;
 
 
 /**
@@ -14,18 +13,13 @@ public class SeleniumCore {
 
     private WebDriver driver;
 
-    public SeleniumCore(String browser) {
-        Optional<String> browserOptional = Optional.of(browser);
-
-        if (browserOptional.isPresent() == false || browserOptional.get().equalsIgnoreCase("firefox")) {
+    public SeleniumCore(Browsers browser) {
+        if (browser.equals(Browsers.FIREFOX)) {
             driver = new WebDriverProvider(WebDriverCreators.FIREFOX).getDriver();
-        } else if (browserOptional.get().equalsIgnoreCase("chrome")) {
+        }
+        if (browser.equals(Browsers.CHROME)) {
             driver = new WebDriverProvider(WebDriverCreators.CHROME).getDriver();
         }
-    }
-
-    public void driverClose() {
-        driver.quit();
     }
 
     public WebDriver getWebDriver() {

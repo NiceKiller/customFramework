@@ -23,9 +23,9 @@ public class TestResultWatcher extends TestWatcher {
 
     private SeleniumCore seleniumCore;
 
-   public void setSeleniumCore(SeleniumCore seleniumCore) {
-       this.seleniumCore = seleniumCore;
-   }
+    public void setSeleniumCore(SeleniumCore seleniumCore) {
+        this.seleniumCore = seleniumCore;
+    }
 
     @Override
     protected void failed(Throwable e, Description description) {
@@ -34,7 +34,7 @@ public class TestResultWatcher extends TestWatcher {
 
     @Override
     protected void finished(Description description) {
-        if(this.seleniumCore.getWebDriver() != null) {
+        if (this.seleniumCore.getWebDriver() != null) {
             try {
                 this.seleniumCore.getWebDriver().quit();
             } catch (WebDriverException e) {
