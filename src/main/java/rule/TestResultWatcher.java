@@ -9,10 +9,13 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+
+import static com.google.common.io.Files.toByteArray;
 
 /**
  * Created by Bartlomiej_Zawadzki on 9/29/2016.
@@ -44,7 +47,8 @@ public class TestResultWatcher extends TestWatcher {
 
     }
 
-    public void takeScreenShotOnFailure(Description description) {
+    @Attachment(value = "{0}", type = "image/png")
+    public byte[] takeScreenShotOnFailure(Description description) {
         File screenshoot = null;
         File scrFile = ((TakesScreenshot) seleniumCore.getWebDriver()).getScreenshotAs(OutputType.FILE);
         try {
@@ -52,7 +56,12 @@ public class TestResultWatcher extends TestWatcher {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        LOG.info(screenshoot.getAbsolutePath());
+        try {
+            return toByteArray(screenshoot);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new byte[0];
     }
 
     private String getScreenShotFilePath(Description description) {
