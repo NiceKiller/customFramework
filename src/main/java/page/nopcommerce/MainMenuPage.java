@@ -30,11 +30,11 @@ public class MainMenuPage extends AbstractPage {
         super(seleniumCore);
     }
 
-    public void clickRegistrationButton(){
+    public void clickRegistrationButton() {
         clickElement(registrationButton);
     }
 
-    public String getCustomerInformationLabelText(){
+    public String getCustomerInformationLabelText() {
         return getElementText(customerInformationLabel);
     }
 

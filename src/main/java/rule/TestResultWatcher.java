@@ -1,6 +1,7 @@
 package rule;
 
 import core.SeleniumCore;
+import helper.ScreenshotHelper;
 import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import static com.google.common.io.Files.toByteArray;
+import static utils.TestDescription.getSimpleMethodName;
 
 /**
  * Created by Bartlomiej_Zawadzki on 9/29/2016.
@@ -25,6 +27,7 @@ public class TestResultWatcher extends TestWatcher {
     private static final Logger LOG = LoggerFactory.getLogger(TestResultWatcher.class);
 
     private SeleniumCore seleniumCore;
+    private ScreenshotHelper screenshotHelper;
 
     public void setSeleniumCore(SeleniumCore seleniumCore) {
         this.seleniumCore = seleniumCore;
@@ -32,7 +35,8 @@ public class TestResultWatcher extends TestWatcher {
 
     @Override
     protected void failed(Throwable e, Description description) {
-        takeScreenShotOnFailure(description);
+        screenshotHelper = new ScreenshotHelper();
+        screenshotHelper.takeScreenShotOnFailure(description, seleniumCore);
     }
 
     @Override
@@ -47,29 +51,5 @@ public class TestResultWatcher extends TestWatcher {
 
     }
 
-    @Attachment(value = "{0}", type = "image/png")
-    public byte[] takeScreenShotOnFailure(Description description) {
-        File screenshoot = null;
-        File scrFile = ((TakesScreenshot) seleniumCore.getWebDriver()).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(scrFile, screenshoot = new File(getScreenShotFilePath(description)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            return toByteArray(screenshoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new byte[0];
-    }
-
-    private String getScreenShotFilePath(Description description) {
-        return "target\\screenshot\\" + getScreenShotName(description) + ".jpg";
-    }
-
-    private String getScreenShotName(Description description) {
-        return description.getMethodName() + "_" + new Date().getTime();
-    }
 
 }

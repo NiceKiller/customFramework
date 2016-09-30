@@ -3,7 +3,6 @@ package common;
 import core.SeleniumCore;
 import org.junit.Before;
 import org.junit.Rule;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import rule.TestResultWatcher;
 import utils.SystemProperties;
 

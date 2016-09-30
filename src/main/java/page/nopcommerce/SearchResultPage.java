@@ -8,7 +8,7 @@ import page.AbstractPage;
 /**
  * Created by bzawa on 9/29/2016.
  */
-public class SearchResultPage extends AbstractPage{
+public class SearchResultPage extends AbstractPage {
 
     @FindBy(xpath = "//h2[@class='product-title']//a[contains(@href,'/htc-one-mini-blue')]")
     private WebElement firstItemLabel;

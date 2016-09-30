@@ -2,7 +2,7 @@ package data.dto;
 
 import data.enums.Gender;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Created by bzawa on 9/29/2016.
@@ -12,7 +12,7 @@ public class RegistrationData {
     private Gender gender;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String email;
     private String company;
     private String password;
@@ -44,11 +44,11 @@ public class RegistrationData {
         return this;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public RegistrationData setDateOfBirth(Date dateOfBirth) {
+    public RegistrationData setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
         return this;
     }
@@ -84,7 +84,7 @@ public class RegistrationData {
         private Gender gender;
         private String firstName;
         private String lastName;
-        private Date dateOfBirth;
+        private LocalDate dateOfBirth;
         private String email;
         private String company;
         private String password;
@@ -111,7 +111,7 @@ public class RegistrationData {
             return this;
         }
 
-        public RegistrationDataBuilder withDateOfBirth(Date dateOfBirth) {
+        public RegistrationDataBuilder withDateOfBirth(LocalDate dateOfBirth) {
             this.dateOfBirth = dateOfBirth;
             return this;
         }

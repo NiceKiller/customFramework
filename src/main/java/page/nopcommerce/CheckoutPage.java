@@ -1,6 +1,8 @@
 package page.nopcommerce;
 
 import core.SeleniumCore;
+import data.dto.AddressData;
+import data.dto.PaymentData;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import page.AbstractPage;
@@ -149,4 +151,21 @@ public class CheckoutPage extends AbstractPage {
         return getElementText(sucessfulOrderConfirmationMessage);
     }
 
+    public void checkoutWithCreditCardPayment(AddressData addressData, PaymentData paymentData) {
+        selectCountry(addressData.getCountry())
+                .enterTextInCityInput(addressData.getCity())
+                .enterTextInAddresInput(addressData.getAddress())
+                .enterTextInPostalCodeInput(addressData.getPostCode())
+                .enterTextInPhoneInput(addressData.getPhoneNumber())
+                .clickContinue()
+                .clickContinueShipping()
+                .clickCreditCardImage()
+                .clickContinuePayment()
+                .enterTextInCardHolderName(paymentData.getCardHolderName())
+                .enterTextInCardNumberInput(paymentData.getCardNumber())
+                .selectCardExpirationDate(paymentData.getExpirationMonth(), paymentData.getExpirationYear())
+                .enterTextInCardCodeInput(paymentData.getCardCode())
+                .clickConfirmPaymentInfoButton()
+                .clickConfirmCheckouProcessButton();
+    }
 }

@@ -1,6 +1,7 @@
 package page.nopcommerce;
 
 import core.SeleniumCore;
+import data.dto.RegistrationData;
 import data.enums.Gender;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -118,7 +119,7 @@ public class RegistrationPage extends AbstractPage {
         return this;
     }
 
-    public RegistrationPage confirmRegistration(){
+    public RegistrationPage confirmRegistration() {
         clickElement(confirmRegistartionButton);
         return this;
     }
@@ -127,8 +128,22 @@ public class RegistrationPage extends AbstractPage {
         return getElementText(afterRegistrationMessage);
     }
 
-    public void clickContinueRegistrationButton(){
+    public void clickContinueRegistrationButton() {
         clickElement(continueRegistrationButton);
+    }
+
+    public void registerAccount(RegistrationData registrationData) {
+        selectGender(registrationData.getGender())
+                .enterTextInFirstNameInput(registrationData.getFirstName())
+                .enterTextInLastNameInput(registrationData.getLastName())
+                .selectDayOfBirth(String.valueOf(registrationData.getDateOfBirth().getDayOfMonth()))
+                .selectMonthOfBirth(String.valueOf(registrationData.getDateOfBirth().getMonthValue()))
+                .selectYearOfBirth(String.valueOf(registrationData.getDateOfBirth().getYear()))
+                .eneterTextInEmailInput(registrationData.getEmail())
+                .eneterTextInCompanyInput(registrationData.getCompany())
+                .clickNewsletterCheckBox()
+                .enterTextInPasswordAndConfirmPasswordInput(registrationData.getPassword())
+                .confirmRegistration();
     }
 
 }
