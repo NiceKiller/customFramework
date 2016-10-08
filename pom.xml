@@ -51,6 +51,10 @@
                     </dependency>
                 </dependencies>
                 <configuration>
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>

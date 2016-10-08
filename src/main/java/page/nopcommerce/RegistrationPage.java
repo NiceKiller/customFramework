@@ -3,6 +3,7 @@ package page.nopcommerce;
 import core.SeleniumCore;
 import data.dto.RegistrationData;
 import data.enums.Gender;
+import elements.widget.CheckBox;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import page.AbstractPage;
@@ -40,7 +41,7 @@ public class RegistrationPage extends AbstractPage {
     private WebElement companyInput;
 
     @FindBy(id = "Newsletter")
-    private WebElement newsletterCheckBox;
+    private CheckBox newsletterCheckBox;
 
     @FindBy(id = "Password")
     private WebElement passwordInput;
@@ -109,7 +110,7 @@ public class RegistrationPage extends AbstractPage {
     }
 
     public RegistrationPage clickNewsletterCheckBox() {
-        clickElement(newsletterCheckBox);
+        newsletterCheckBox.toggle();
         return this;
     }
 

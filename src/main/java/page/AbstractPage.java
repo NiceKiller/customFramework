@@ -1,6 +1,7 @@
 package page;
 
 import core.SeleniumCore;
+import elements.factory.api.ElementFactory;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -22,7 +23,7 @@ public abstract class AbstractPage {
     }
 
     private void initPage() {
-        PageFactory.initElements(seleniumCore.getWebDriver(), this);
+        ElementFactory.initElements(seleniumCore.getWebDriver(), this);
     }
 
     public void clickElement(WebElement webElement) {
